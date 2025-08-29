@@ -1,0 +1,25 @@
+slug,name,isBasic,isDark,isSpecial,order
+focus,Aspect of Focus,true,,,0
+study,Aspect of Study,true,,,1
+legend,Aspect of Legend,,,,2
+prophecy,Aspect of Prophecy,,,,3
+lost,Aspect of the Lost,,,,22
+the-crown,Aspect of The Crown,,,,5
+the-wilds,Aspect of The Wilds,,,,6
+pain,Aspect of Pain,,true,,7
+panic,Aspect of Panic,,true,,8
+terror,Aspect of Terror,,true,,9
+blood,Aspect of Blood,,,,10
+flame,Aspect of Flame,,,,11
+the-nobility,Aspect of The Nobility,,,,12
+the-trickster,Aspect of The Trickster,,,,13
+chaos,Aspect of Chaos,,,,14
+energy,Aspect of Energy,,,,15
+order,Aspect of Order,,,,16
+madness,Aspect of Madness,,,,17
+freedom,Aspect of Freedom,,,,18
+resistance,Aspect of Resistance,,,,19
+silence,Aspect of Silence,,,,20
+echoes,Aspect of Echoes,,,,21
+starlight,Aspect of Starlight,,,true,101
+shadows,Aspect of Shadows,,,true,102

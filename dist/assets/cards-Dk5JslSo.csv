@@ -1,0 +1,158 @@
+id,name,type,rank,maxCopies,aspect
+c_infinity,Infinity,Holy,1,4,focus
+c_speed,Speed,Light,1,4,focus
+c_enhance,Enhance,Light,1,3,focus
+c_shield,Shield,Light,1,4,focus
+c_counter,Counter,Light,1,4,focus
+c_haste,Haste,Light,1,3,focus
+c_sorcerersgambit,Sorcerer's Gambit,Light,1,2,focus
+c_arcane_vision,Arcane Vision,Light,1,2,focus
+c_teleport,Teleport,Light,1,2,focus
+c_dread,Dread,Dark,1,2,focus
+s_gainwisdom,Gain Wisdom,Light,2,2,study
+s_flexibletactics,Flexible Tactics,Light,2,2,study
+s_foolscourage,Fool's Courage,Light,2,2,study
+s_trialanderror,Trial and Error,Light,2,2,study
+s_glimpseofinsight,Glimpse of Insight,Light,2,3,study
+s_callofancients,Call of Ancients,Dark,2,1,study
+lost_mend,Mend,Light,4,2,lost
+legend_excaliburs_blessing,Excalibur's Blessing,Light,3,1,legend
+legend_manticores_wrath,Manticores' Wrath,Light,3,2,legend
+legend_medusas_gaze,Medusa's Gaze,Light,3,2,legend
+legend_sirens_song,Sirens' Song,Light,3,2,legend
+legend_wings_of_icarus,Wings of Icarus,Holy,3,2,legend
+legend_cry_of_the_banshee,Cry of the Banshee,Light,3,2,legend
+prophecy_vision_of_destiny,Vision of Destiny,Light,2,2,prophecy
+prophecy_written_in_the_stars,Written in the Stars,Light,2,2,prophecy
+prophecy_hourglass_of_fate,Hourglass of Fate,Light,3,2,prophecy
+prophecy_oracles_intervention,Oracle's Intervention,Light,3,2,prophecy
+prophecy_fulfillment_of_doom,Fulfillment of Doom,Dark,3,1,prophecy
+prophecy_threads_of_fate,Threads of Fate,Light,3,3,prophecy
+lost_divine_intervention,Divine Intervention,Holy,3,2,lost
+lost_fear,Fear,Light,3,3,lost
+lost_radiant_retrieval,Radiant Retrieval,Light,2,3,lost
+lost_arcane_reset,Arcane Reset,Light,3,3,lost
+lost_seal_of_denial,Seal of Denial,Light,2,3,lost
+lost_thought_acceleration,Thought Acceleration,Light,4,2,lost
+lost_wish,Wish,Holy,5,3,lost
+lost_mystical_knowledge,Mystical Knowledge,Light,3,2,lost
+thecrown_majestys_valor,Majesty's Valor,Holy,2,2,the-crown
+thecrown_divine_favor,Divine Favor,Holy,2,2,the-crown
+thecrown_radiant_aegis,Radiant Aegis,Light,3,2,the-crown
+thecrown_royal_aura,Royal Aura,Light,3,2,the-crown
+thecrown_royal_destiny,Royal Destiny,Light,3,1,the-crown
+thecrown_heirs_prerogative,Heir's Prerogative,Light,3,2,the-crown
+thecrown_mimic_mantle,Mimic Mantle,Light,3,2,the-crown
+thecrown_royal_mantle,Royal Mantle,Light,3,1,the-crown
+wilds_thorn_shield,Thorn Shield,Light,3,2,the-wilds
+wilds_twilight_reign,Twilight Reign,Dark,3,1,the-wilds
+wilds_verdant_judgement,Verdant Judgement,Light,4,2,the-wilds
+wilds_path_of_thorns,Path of Thorns,Light,3,2,the-wilds
+wilds_whispers_of_the_wild,Whispers of the Wild,Light,2,2,the-wilds
+wilds_rootshift,Rootshift,Light,2,2,the-wilds
+pain_agonys_grasp,Agony's Grasp,Light,3,2,pain
+pain_surge_of_desperation,Surge of Desperation,Light,3,2,pain
+pain_wounds_of_betrayal,Wounds of Betrayal,Light,3,3,pain
+pain_gift_of_agony,Gift of Agony,Dark,4,1,pain
+pain_torment_bind,Torment Bind,Light,3,2,pain
+pain_lingering_miasma,Lingering Miasma,Light,3,2,pain
+panic_demonic_intervention,Demonic Intervention,Dark,4,1,panic
+panic_rush,Rush,Light,3,2,panic
+panic_terror_grip,Terror Grip,Light,4,4,panic
+panic_paralysing_dread,Paralysing Dread,Light,3,2,panic
+panic_disruption,Disruption,Light,3,2,panic
+panic_fracture,Fracture,Light,3,2,panic
+terror_veil_of_dread,Veil of Dread,Light,4,3,terror
+terror_horror,Horror,Light,3,2,terror
+terror_second_shadow,Second Shadow,Light,3,2,terror
+terror_unwelcome_silence,Unwelcome Silence,Light,3,2,terror
+terror_deadly_deal,Deadly Deal,Dark,4,1,terror
+blood_blood_pact,Blood Pact,Light,3,2,blood
+blood_return_from_death,Return from Death,Light,4,2,blood
+blood_bloodbound_resolve,Bloodbound Resolve,Light,3,2,blood
+blood_veins_of_sacrifice,Veins of Sacrifice,Light,3,2,blood
+blood_shared_vitality,Shared Vitality,Light,3,2,blood
+blood_vampiric_desire,Vampric Desire,Light,3,2,blood
+flame_sacrificial_flame,Sacrificial Flame,Light,3,2,flame
+flame_flame_surge,Flame Surge,Light,3,2,flame
+flame_ember_shield,Ember Shield,Light,4,2,flame
+flame_flame_unbound,Flame Unbound,Light,3,3,flame
+flame_burning_grace,Burning Grace,Holy,3,2,flame
+flame_purging_fire,Purging Fire,Light,4,3,flame
+nobility_kings_gaze,King's Gaze,Light,3,2,the-nobility
+nobility_champions_glory,Champion's Glory,Holy,3,2,the-nobility
+nobility_last_wish,Last Wish,Light,3,2,the-nobility
+nobility_knighted_by_fire,Knighted by Fire,Light,3,2,the-nobility
+nobility_knights_vow,Knight's Vow,Light,3,2,the-nobility
+trickster_rogues_gambit,Rogue's Gambit,Light,3,2,the-trickster
+trickster_smoke_and_mirrors,Smoke and Mirrors,Light,3,2,the-trickster
+trickster_poison,Poison,Light,4,3,the-trickster
+trickster_slipstream_decoy,Slipstream Decoy,Light,3,2,the-trickster
+trickster_decoy_form,Decoy Form,Light,3,2,the-trickster
+trickster_feint,Feint,Light,3,2,the-trickster
+trickster_ensnare_1,Ensnare 1,Light,3,1,the-trickster
+trickster_ensnare_2,Ensnare 2,Light,3,1,the-trickster
+trickster_ensnare_3,Ensnare 3,Light,3,1,the-trickster
+chaos_break_reality,Break Reality,Light,4,1,chaos
+chaos_chaotic_surge,Chaotic Surge,Light,3,2,chaos
+chaos_confusion,Confusion,Light,3,2,chaos
+chaos_unpredictable_boon,Unpredictable Boon,Light,3,2,chaos
+chaos_cascading_instability,Cascading Instability,Light,3,2,chaos
+chaos_collapsing_space,Collapsing Space,Light,3,1,chaos
+chaos_schrodingers_grimoire,Schrödinger’s Grimoire,Dark,5,1,chaos
+energy_supernova_converter,Supernova Energy Converter,Light,4,2,energy
+energy_burst,Energy Burst,Light,3,1,energy
+energy_flux,Energy Flux,Light,2,1,energy
+energy_will_power,Will Power,Light,4,1,energy
+energy_fears_grasp,Fear's Grasp,Light,4,1,energy
+energy_rage_unleashed,Rage Unleashed,Light,4,1,energy
+energy_greeds_influence,Greed's Influence,Dark,5,1,energy
+order_martial_command,Martial Command,Light,3,1,order
+order_absolute_authority,Absolute Authority,Light,3,3,order
+order_chain_of_command,Chain of Command,Light,3,1,order
+order_silence_rebellion,Silence Rebellion,Dark,4,1,order
+order_blockade,Blockade,Light,3,3,order
+madness_twisted_space,Twisted Space,Light,4,1,madness
+madness_shattered_time,Shattered Time,Light,5,1,madness
+madness_splintered_mind,Splintered Mind,Light,3,1,madness
+madness_unhinged_reality,Unhinged Reality,Light,3,1,madness
+madness_chaotic_power,Chaotic Power,Light,4,1,madness
+madness_eclipsed_soul,Eclipsed Soul,Light,5,1,madness
+madness_balance,Balance,Dark,5,1,madness
+freedom_unyielding_will,Unyielding Will,Holy,3,2,freedom
+freedom_rallying_cry,Rallying Cry,Light,2,2,freedom
+freedom_chain_break,Chain Break,Light,4,2,freedom
+freedom_liberators_path,Liberator's Path,Light,3,1,freedom
+freedom_limit_breaker,Limit Breaker,Light,4,2,freedom
+resistance_twilight_strategy,Twilight Strategy,Light,4,2,resistance
+resistance_illusory_ambush,Illusory Ambush,Light,4,2,resistance
+resistance_magic_bound,Magic Bound,Light,3,2,resistance
+resistance_counterstrike,Counterstrike,Light,3,2,resistance
+resistance_force_field,Force Field,Light,3,2,resistance
+resistance_last_stand,Last Stand,Dark,2,1,resistance
+silence_sacred_restraint,Sacred Restraint,Holy,3,1,silence
+silence_hush,Hush,Light,3,3,silence
+silence_unspoken_oath,Unspoken Oath,Holy,3,1,silence
+silence_oathbound,Oathbound,Light,3,2,silence
+silence_seal_of_whispers,Seal of Whispers,Dark,4,1,silence
+silence_mute,Mute,Light,3,1,silence
+echoes_repeat,Repeat,Light,3,2,echoes
+echoes_recall,Recall,Light,3,2,echoes
+echoes_inversion,Inversion,Light,3,2,echoes
+echoes_echo_sanctuary,Echo Sanctuary,Holy,3,2,echoes
+echoes_resonance_shift,Resonance Shift,Light,3,2,echoes
+echoes_disturbance,Disturbance,Light,3,2,echoes
+shadows_retribution,Retribution,Shadow,4,1,shadows
+shadows_echo,Echo,Shadow,3,1,shadows
+shadows_desecration,Desecration,Shadow,4,1,shadows
+shadows_silence,Silence,Shadow,4,1,shadows
+shadows_nightmare,Nightmare,Shadow,5,1,shadows
+shadows_null,Null,Shadow,3,1,shadows
+shadows_twilight_seal,Twilight Seal,Shadow,4,1,shadows
+starlight_starlight_echo,Starlight Echo,Astral,3,2,starlight
+starlight_guiding_star,Guiding Star,Astral,4,2,starlight
+starlight_phase_shift,Phase Shift,Astral,4,2,starlight
+starlight_celestial_fortification,Celestial Fortification,Astral,4,2,starlight
+starlight_stargaze,Stargaze,Astral,4,2,starlight
+starlight_eclipse,Eclipse,Astral,4,2,starlight
+starlight_sirisum,Sirisum,Astral,5,1,starlight
