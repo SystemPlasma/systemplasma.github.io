@@ -7,7 +7,7 @@ const cardsCsvUrl = new URL('./assets/data/cards.csv', import.meta.url).href;
 const codesCsvUrl = new URL('./assets/data/unlock_codes.csv', import.meta.url).href;
 
 /** ------------------------
- * Mock Data (swap later)
+ * Card Data
  * ---------------------- */
 type SpellType = "Holy" | "Light" | "Dark" | "Astral" | "Shadow";
 
