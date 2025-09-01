@@ -5,6 +5,17 @@
     <link rel="icon" type="image/x-icon" href="/wkw/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WK:W Grimoire Binding</title>
+    <script>
+      (function enforceHost(){
+        var allowed = new Set([
+          'systemplasma.github.io', // production
+          'localhost', '127.0.0.1', '::1' // local dev
+        ]);
+        if (!allowed.has(location.hostname)) {
+          location.replace('https://systemplasma.github.io/wkw/');
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="/wkw/assets/index-DxClsufb.js"></script>
     <link rel="stylesheet" crossorigin href="/wkw/assets/index-BiGH1Due.css">
   </head>
