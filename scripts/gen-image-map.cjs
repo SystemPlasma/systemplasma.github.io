@@ -6,6 +6,14 @@
 const fs = require('fs');
 const path = require('path');
 
+function idVariants(id) {
+  const variants = new Set([id]);
+  // Normalize patterns like foo_bar_1 -> foo_bar1 (remove underscore before digits)
+  const noUnderscoreBeforeDigits = id.replace(/_(\d+)/g, '$1');
+  variants.add(noUnderscoreBeforeDigits);
+  return Array.from(variants);
+}
+
 function parseCSV(raw) {
   const lines = raw.replace(/\r\n?/g, '\n').split('\n').filter(l => l.trim().length > 0);
   if (!lines.length) return [];
@@ -59,13 +67,16 @@ function main() {
   const entries = [];
   for (const id of ids) {
     let found = null;
-    for (const ext of exts) {
-      const p = path.join(cardsDir, `${id}.${ext}`);
-      if (fs.existsSync(p)) { found = { id, ext }; break; }
+    const candidates = idVariants(id);
+    outer: for (const cand of candidates) {
+      for (const ext of exts) {
+        const p = path.join(cardsDir, `${cand}.${ext}`);
+        if (fs.existsSync(p)) { found = { id, ext, cand }; break outer; }
+      }
     }
     if (!found) {
-      // Default to png path even if the file doesn't exist yet; app handles fallback
-      found = { id, ext: 'png' };
+      // Default to png path for the original id if nothing exists; app handles fallback
+      found = { id, ext: 'png', cand: id };
     }
     entries.push(found);
   }
@@ -74,7 +85,7 @@ function main() {
   const lines = [
     header,
     `export const CARD_IMAGE_URLS: Record<string, string> = {`,
-    ...entries.map(({ id, ext }) => `  '${id}': new URL('./assets/cards/${id}.${ext}', import.meta.url).href,`),
+    ...entries.map(({ id, ext, cand }) => `  '${id}': new URL('./assets/cards/${cand}.${ext}', import.meta.url).href,`),
     `};`,
     `export default CARD_IMAGE_URLS;`,
     ``,
