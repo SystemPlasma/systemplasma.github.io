@@ -55,6 +55,19 @@ function main() {
     const rel = path.relative(root, abs).split(path.sep).join('/');
     const base = path.basename(abs, path.extname(abs));
     map[base] = rel; // store as project-relative path like "assets/xyz.png"
+
+    // Also add an alias without a trailing hash segment if present.
+    // Pattern: <slug>-<hash> where hash is 6+ word chars.
+    const dash = base.lastIndexOf('-');
+    if (dash > 0) {
+      const possibleHash = base.slice(dash + 1);
+      if (/^[A-Za-z0-9_\-]{6,}$/.test(possibleHash)) {
+        const slug = base.slice(0, dash);
+        if (!(slug in map)) {
+          map[slug] = rel;
+        }
+      }
+    }
   }
 
   ensureDir(outDir);
@@ -63,4 +76,3 @@ function main() {
 }
 
 main();
-
