@@ -1,6 +1,6 @@
 {
   "name": "wkw-deckbuilder",
-  "home": "https://systemplasma.github.io/wkw-deckbuilder",
+  "home": "https://systemplasma.github.io/wkw/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/SystemPlasma/systemplasma.github.io.git -b main --dest wkw -m 'Deploy WKW Grimoire Binding'"
   },
   "dependencies": {
     "gh-pages": "^6.3.0",

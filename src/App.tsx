@@ -935,7 +935,7 @@ export default function App() {
               </div>
             </details>
           </div>
-          <h1 className="text-2xl font-bold justify-self-center">WKW Deck Builder</h1>
+          <h1 className="text-2xl font-bold justify-self-center">WKW Grimoire Binding</h1>
           <div className="flex items-center gap-2 justify-self-center mx-8">
             {!overrideAll && (
               <button

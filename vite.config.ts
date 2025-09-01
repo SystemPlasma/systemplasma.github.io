@@ -4,5 +4,9 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/wkw-deckbuilder/"
+  // Deploy under user site subpath
+  base: "/wkw/",
+  build: {
+    sourcemap: false,
+  },
 })

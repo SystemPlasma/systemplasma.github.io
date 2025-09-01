@@ -4,10 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WK:W Deck Builder</title>
+    <title>WK:W Grimoire Binding</title>
+    <script>
+      (function enforceHost(){
+        var allowed = new Set([
+          'systemplasma.github.io', // production
+          'localhost', '127.0.0.1', '::1' // local dev
+        ]);
+        if (!allowed.has(location.hostname)) {
+          location.replace('https://systemplasma.github.io/wkw/');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <footer
+      style="position:fixed;left:0;right:0;bottom:0;text-align:center;font-size:12px;opacity:0.7;padding:6px 0;pointer-events:none;"
+      aria-hidden="true"
+    >
+      GetSirius55 Reserves All Rights to assets, consepts, design, rules, etc.
+    </footer>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
