@@ -1,7 +1,31 @@
 <!doctype html>
-<meta charset="utf-8"/>
-<title>Redirecting…</title>
-<meta http-equiv="refresh" content="0; url=/wkw/"/>
-<link rel="canonical" href="/wkw/"/>
-<script>location.replace('/wkw/');</script>
-<p>If you are not redirected, <a href="/wkw/">click here</a>.</p>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/wkw-deckbuilder/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WK:W Deck Builder</title>
+    <script>
+      (function enforceHost(){
+        var allowed = new Set([
+          'systemplasma.github.io', // production
+          'localhost', '127.0.0.1', '::1' // local dev
+        ]);
+        if (!allowed.has(location.hostname)) {
+          location.replace('https://systemplasma.github.io/wkw-deckbuilder/');
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/wkw-deckbuilder/assets/index-BMpA1oL-.js"></script>
+    <link rel="stylesheet" crossorigin href="/wkw-deckbuilder/assets/index-DNZZCRow.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <footer
+      style="position:fixed;left:0;right:0;bottom:0;text-align:center;font-size:12px;opacity:0.7;padding:6px 0;pointer-events:none;"
+      aria-hidden="true"
+    >
+      GetSirius55 Reserves All Rights to assets, consepts, design, rules, etc.
+    </footer>
+  </body>
+</html>
