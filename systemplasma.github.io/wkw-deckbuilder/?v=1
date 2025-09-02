@@ -16,8 +16,8 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="./wkw-deckbuilder/assets/index-BMpA1oL-.js"></script>
-    <link rel="stylesheet" crossorigin href="./wkw-deckbuilder/assets/index-DNZZCRow.css">
+    <script type="module" crossorigin src="/wkw-deckbuilder/assets/index.js"></script>
+    <link rel="stylesheet" crossorigin href="/wkw-deckbuilder/assets/index.css">
   </head>
   <body>
     <div id="root"></div>
