@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /*
-  Prepare a staging folder for GitHub Pages deploy with a single site path:
-  - /wkw/ -> the app (no other redirects or legacy paths)
+  Option A: Deploy to /wkw-deckbuilder/ only (no redirects)
+  - Copies built files from existing wkw/ (or dist/) and rewrites index.html
+    to point to the /wkw-deckbuilder/ base.
 */
 const fs = require('fs');
 const path = require('path');
@@ -19,13 +20,13 @@ function copyDir(src, dest) {
 const root = process.cwd();
 const dist = path.join(root, 'dist');
 const out = path.join(root, 'out');
-const outWkw = path.join(out, 'wkw');
+const outDeck = path.join(out, 'wkw-deckbuilder');
 
 // Clean staging dir
 try { fs.rmSync(out, { recursive: true, force: true }); } catch {}
 fs.mkdirSync(out, { recursive: true });
 
-// Choose source: prefer existing wkw/ folder, else dist/
+// Choose source: prefer existing wkw/ folder (built previously for /wkw/), else dist/
 let srcDir = null;
 if (fs.existsSync(path.join(root, 'wkw'))) srcDir = path.join(root, 'wkw');
 else if (fs.existsSync(dist)) srcDir = dist;
@@ -34,7 +35,25 @@ else {
   process.exit(1);
 }
 
-// Copy build to /wkw
-copyDir(srcDir, outWkw);
+// Copy assets and root files to /wkw-deckbuilder
+fs.mkdirSync(outDeck, { recursive: true });
+if (fs.existsSync(path.join(srcDir, 'assets'))) {
+  copyDir(path.join(srcDir, 'assets'), path.join(outDeck, 'assets'));
+}
+for (const f of ['favicon.ico', 'vite.svg']) {
+  const p = path.join(srcDir, f);
+  if (fs.existsSync(p)) fs.copyFileSync(p, path.join(outDeck, f));
+}
+
+// Rewrite index.html to point to /wkw-deckbuilder/
+const idxPath = path.join(srcDir, 'index.html');
+if (!fs.existsSync(idxPath)) {
+  console.error('[prepare-deploy] Missing index.html in', srcDir);
+  process.exit(1);
+}
+let html = fs.readFileSync(idxPath, 'utf8');
+html = html.replaceAll('/wkw/', '/wkw-deckbuilder/');
+html = html.replace('WK:W Grimoire Binding', 'WK:W Deck Builder');
+fs.writeFileSync(path.join(outDeck, 'index.html'), html);
 
 console.log('[prepare-deploy] Staged deploy at', path.relative(root, out));
