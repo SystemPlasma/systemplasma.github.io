@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "node scripts/prepare-deploy.cjs && gh-pages -d out -r https://github.com/SystemPlasma/systemplasma.github.io.git -b main -m 'Deploy wkw-deckbuilder single page'"
+    "deploy": "node scripts/prepare-deploy.cjs && gh-pages -d out -r https://github.com/SystemPlasma/systemplasma.github.io.git -b main -m 'Deploy /wkw (no redirects)'"
   },
   "dependencies": {
     "gh-pages": "^6.3.0",

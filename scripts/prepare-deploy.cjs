@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 /*
-  Prepare a staging folder for GitHub Pages deploy that includes a single page app at:
-  - /wkw-deckbuilder/        (the original, working path)
-
-  It copies built files and rewrites index.html to use the /wkw-deckbuilder/ base.
+  Prepare a staging folder for GitHub Pages deploy with a single site path:
+  - /wkw/ -> the app (no other redirects or legacy paths)
 */
 const fs = require('fs');
 const path = require('path');
@@ -21,41 +19,22 @@ function copyDir(src, dest) {
 const root = process.cwd();
 const dist = path.join(root, 'dist');
 const out = path.join(root, 'out');
-const outDeck = path.join(out, 'wkw-deckbuilder');
-const builtWkw = path.join(root, 'wkw');
+const outWkw = path.join(out, 'wkw');
 
 // Clean staging dir
 try { fs.rmSync(out, { recursive: true, force: true }); } catch {}
 fs.mkdirSync(out, { recursive: true });
 
-// Source of truth for built files
+// Choose source: prefer existing wkw/ folder, else dist/
 let srcDir = null;
-if (fs.existsSync(builtWkw)) srcDir = builtWkw;
+if (fs.existsSync(path.join(root, 'wkw'))) srcDir = path.join(root, 'wkw');
 else if (fs.existsSync(dist)) srcDir = dist;
 else {
-  console.error('[prepare-deploy] Could not find built files in wkw/ or dist/. Run build first.');
+  console.error('[prepare-deploy] Missing build. Run npm run build first.');
   process.exit(1);
 }
 
-// Copy assets and favicon into /wkw-deckbuilder
-fs.mkdirSync(outDeck, { recursive: true });
-if (fs.existsSync(path.join(srcDir, 'assets'))) {
-  copyDir(path.join(srcDir, 'assets'), path.join(outDeck, 'assets'));
-}
-for (const f of ['favicon.ico', 'vite.svg']) {
-  const p = path.join(srcDir, f);
-  if (fs.existsSync(p)) fs.copyFileSync(p, path.join(outDeck, f));
-}
-
-// Rewrite index.html to point to /wkw-deckbuilder/
-const idxPath = path.join(srcDir, 'index.html');
-if (!fs.existsSync(idxPath)) {
-  console.error('[prepare-deploy] Missing index.html in', srcDir);
-  process.exit(1);
-}
-let html = fs.readFileSync(idxPath, 'utf8');
-html = html.replaceAll('/wkw/', '/wkw-deckbuilder/');
-html = html.replace('WK:W Grimoire Binding', 'WK:W Deck Builder');
-fs.writeFileSync(path.join(outDeck, 'index.html'), html);
+// Copy build to /wkw
+copyDir(srcDir, outWkw);
 
 console.log('[prepare-deploy] Staged deploy at', path.relative(root, out));
