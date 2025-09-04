@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Inline favicon to avoid 404s and CSP issues -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%234f46e5'/%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSP allowing this page to load its own assets on Pages -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>WK:W Grimoire Binding</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <footer
+    style="position:fixed;left:0;right:0;bottom:0;text-align:center;font-size:12px;opacity:0.7;padding:6px 0;pointer-events:none;"
+    aria-hidden="true">
+    Property of SystemPlasma &amp; GetSirius55. All Rights Reserved
+  </footer>
+  <!-- Vite dev entry; replaced with hashed assets on build -->
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
