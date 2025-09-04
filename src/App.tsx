@@ -153,7 +153,7 @@ const TYPE_ORDER: Record<SpellType, number> = { Holy: 5, Light: 4, Astral: 3, Sh
  * Small UI helpers
  * ---------------------- */
 function Pill({ children }: { children: React.ReactNode }) {
-  return <span className="px-2 py-1 rounded-full text-xs bg-slate-200">{children}</span>;
+  return <span className="px-2 py-1 rounded-full text-xs bg-slate-200 dark:bg-slate-700 dark:text-slate-100">{children}</span>;
 }
 
 // Tooltip removed in favor of click-to-open preview modal
@@ -181,15 +181,20 @@ function AspectCard({
       className={[
         "rounded-2xl p-4 w-full text-center border transition shadow-sm focus:outline-none relative",
         selected
-          ? "border-indigo-600 bg-indigo-50 ring-2 ring-indigo-500 ring-offset-2 ring-offset-white shadow-md z-10"
+          ? [
+              // Light mode selected style
+              "border-indigo-600 bg-indigo-50 ring-2 ring-indigo-500 ring-offset-2 ring-offset-white shadow-md z-10",
+              // Dark mode selected style — darker panel, indigo accents, correct offset
+              "dark:bg-slate-800 dark:border-indigo-400 dark:ring-indigo-400 dark:ring-offset-slate-900",
+            ].join(' ')
           : "border-slate-400 bg-slate-200 hover:bg-slate-300 hover:shadow-md dark:bg-slate-800 dark:border-slate-600",
-        !unlocked || disabled ? "opacity-50 cursor-not-allowed" : "hover:border-slate-500",
+        (!unlocked || disabled) ? "opacity-50 dark:opacity-90 cursor-not-allowed" : "hover:border-slate-500",
       ].join(" ")}
     >
       <div className="flex flex-col items-center gap-1">
         {unlocked ? (
           <>
-            <div className="text-sm text-slate-500">
+            <div className="text-sm text-slate-500 dark:text-slate-400">
               {aspect.isBasic ? "Basics" : aspect.isSpecial ? "Special" : aspect.isDark ? "Dark Art" : "Aspect"}
             </div>
             <div className="text-base font-semibold">{aspect.name}</div>
@@ -232,7 +237,7 @@ function UnlockModal({
         style={{ borderRadius: '1rem', padding: '1.5rem', maxWidth: 480, width: '100%' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-xl font-bold text-center text-white dark:text-slate-100">Unlock an Aspect</h2>
+        <h2 className="text-xl font-bold text-center text-black dark:text-slate-100">Unlock an Aspect</h2>
         {lastUnlocked && (
           <div className="text-sm text-center font-medium text-slate-900 dark:text-slate-100">
             {lastUnlocked === 'Invalid Code' || lastUnlocked === 'Code Already Used'
@@ -240,7 +245,7 @@ function UnlockModal({
               : `Unlocked: ${lastUnlocked}`}
           </div>
         )}
-        <p className="text-sm text-center text-white dark:text-slate-100">
+        <p className="text-xl text-center text-black dark:text-slate-100">
           Enter your code to reveal an Aspect’s spells.
         </p>
         <input
@@ -248,7 +253,7 @@ function UnlockModal({
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
           placeholder="Enter code"
-          className="w-full h-[60px] border rounded-xl p-6 text-6xl uppercase bg-white text-black placeholder:text-slate-500 border-slate-300 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 dark:border-slate-700"
+          className="w-full h-[60px] border rounded-xl p-6 text-2xl uppercase bg-white text-black placeholder:text-slate-500 border-slate-300 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 dark:border-slate-700"
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               const res = onRedeem(code);
@@ -321,21 +326,21 @@ function CardRow({
   const noRoomType = countsTowardPages && remainingTypeSlots <= 0;
   const addDisabled = !locked && (noRoomTotal || qty >= card.maxCopies);
   return (
-    <div className="grid grid-cols-12 items-center gap-y-2 gap-x-1 md:gap-x-2 py-2 px-4 md:px-6 lg:px-8">
+    <div className="grid grid-cols-12 items-center gap-y-2 gap-x-4 md:gap-x-6 py-2 px-4 md:px-6 lg:px-8">
       <div className="col-span-5 font-medium truncate text-left">
         {locked ? (
           <span className="text-slate-500">{"<Locked>"}</span>
         ) : (
           <button
             type="button"
-            className="text-indigo-700 hover:underline"
+            className="inline-flex items-center rounded px-2 py-1 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 shadow-sm dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
             onClick={() => { console.log('[CardRow.preview]', { id: card.id, name: card.name }); onPreview?.(card); }}
           >
             {card.name}
           </button>
         )}
       </div>
-      <div className="col-span-2 text-sm text-slate-600 text-center">
+      <div className="col-span-2 text-sm text-slate-600 dark:text-slate-300 text-center">
         {(() => {
           const PARALLEL_IDS = new Set<string>([
             'energy_supernova_converter','energy_will_power','energy_fears_grasp','energy_rage_unleashed',
@@ -345,12 +350,12 @@ function CardRow({
           return locked ? '?' : `${card.type}${mark} · R${card.rank}`;
         })()}
       </div>
-      <div className="col-span-2 text-xs text-slate-500 text-center">Max {card.maxCopies}</div>
-      <div className="col-span-3 flex items-center gap-2 justify-end">
+      <div className="col-span-5 flex items-center gap-2 justify-end pl-4 md:pl-6">
+        <span className="text-xs text-slate-500 dark:text-slate-300 whitespace-nowrap mr-3">Max {card.maxCopies}</span>
         <button
           onClick={() => { if (qty <= 0) return; const n = Math.max(0, qty - 1); console.log('[CardRow.qty-]', { id: card.id, from: qty, to: n }); onChange(n); }}
           disabled={qty <= 0}
-          className={["px-2 py-1 rounded", qty <= 0 ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
+          className={["px-2 py-1 rounded shadow-sm text-lg font-bold text-slate-900 dark:text-slate-900 leading-none", qty <= 0 ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
         >
           -
         </button>
@@ -365,7 +370,7 @@ function CardRow({
             onChange(n);
           }}
           disabled={locked || noRoomTotal || qty >= card.maxCopies}
-          className={["px-2 py-1 rounded", locked || addDisabled || qty >= card.maxCopies ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
+          className={["px-2 py-1 rounded shadow-sm text-lg font-bold text-slate-900 dark:text-slate-900 leading-none", locked || addDisabled || qty >= card.maxCopies ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
         >
           +
         </button>
@@ -386,7 +391,7 @@ function CardRow({
             onChange(target);
           }}
           disabled={locked || noRoomTotal}
-          className={["px-2 py-1 rounded", (locked || noRoomTotal) ? "bg-slate-100 text-slate-400 cursor-not-allowed" : "bg-indigo-100 text-indigo-800 hover:bg-indigo-200"].join(' ')}
+          className={["px-2 py-1 rounded shadow-sm", (locked || noRoomTotal) ? "bg-slate-100 text-slate-400 cursor-not-allowed" : "bg-indigo-100 text-indigo-800 hover:bg-indigo-200"].join(' ')}
           title={`Set to Max (${card.maxCopies})`}
         >
           MAX
@@ -527,7 +532,7 @@ function DeckExport({ entries, aspects, cards, hasAstral, hasShadow }: { entries
   }, [entries]);
 
   return (
-    <div className="bg-slate-50 rounded-xl p-3 text-sm font-mono text-left">
+    <div className="rounded-xl p-3 text-sm font-mono text-left bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100">
       {(() => {
         // Helper to fetch lines for a given type
         const byType: Record<SpellType, string[]> = {
@@ -906,21 +911,21 @@ export default function App() {
   const showDarkCategory = overrideAll || aspects.some((a) => a.isDark && unlocksSet.has(a.slug));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex justify-center px-6 md:px-10 lg:px-20 xl:px-28 py-6 m-4 sm:m-6 md:m-8 lg:m-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex justify-center px-6 md:px-10 lg:px-20 xl:px-28 py-6 m-4 sm:m-6 md:m-8 lg:m-12">
       <div className="max-w-7xl w-full mx-auto space-y-6 sm:space-y-8 text-center">
         <header className="grid grid-cols-3 items-center justify-items-center w-full px-4 md:px-6">
           <div className="justify-self-center mx-8">
             <details className="relative">
-              <summary className="list-none cursor-pointer inline-flex items-center gap-3 rounded-xl border-2 px-6 py-3 text-2xl bg-white text-black shadow-md font-semibold min-w-[180px]">
+              <summary className="list-none cursor-pointer inline-flex items-center gap-3 rounded-xl border-2 px-6 py-3 text-2xl bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100 border-slate-300 dark:border-slate-600 shadow-md font-semibold min-w-[180px]">
                 <span>Rank: {rankCap}</span>
                 <span aria-hidden>▾</span>
               </summary>
-              <div className="absolute z-20 mt-2 w-56 rounded-lg border bg-white shadow-xl">
+              <div className="absolute z-20 mt-2 w-56 rounded-lg border bg-white dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 shadow-xl">
                 {[1,2,3,4,5].map((n) => (
                   <button
                     key={n}
                     type="button"
-                    className={["block w-full text-left px-5 py-2.5 text-lg hover:bg-slate-100", n===rankCap?"font-semibold":""].join(' ')}
+                    className={["block w-full text-left px-5 py-2.5 text-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100", n===rankCap?"font-semibold":""].join(' ')}
                     onClick={(e) => {
                       e.preventDefault();
                       setRankCap(n);
@@ -934,8 +939,11 @@ export default function App() {
                 ))}
               </div>
             </details>
+            <div className="mt-2 text-xs text-slate-600 dark:text-slate-300 text-center max-w-[240px]">
+              Some aspects only appear at higher Ranks.
+            </div>
           </div>
-          <h1 className="text-2xl font-bold justify-self-center text-center">WKW Deck Builder</h1>
+          <h1 className="text-3xl md:text-4xl font-bold justify-self-center text-center">WKW Deck Builder</h1>
           <div className="flex items-center gap-2 justify-self-center mx-8">
             {!overrideAll && (
               <button
@@ -984,6 +992,84 @@ export default function App() {
                 />
               ))}
             </div>
+            {/* Dark Arts directly under Basics */}
+            {showDarkCategory && (
+              <div className="space-y-3">
+                <h2 className="font-semibold text-center">Dark Arts</h2>
+                {!overrideAll && allDarkTrioSelected && (
+                  <>
+                    <div className="text-sm font-semibold text-center mb-3">
+                      <span className="text-red-700 font-bold" style={{ color: '#dc2626', fontWeight: 700 }}>Dark Arts Penalty:</span>
+                      {' '}When all three Dark Aspects are chosen, [Holy] spells count as [Light] and lose [Holy] counter rules.
+                    </div>
+                    <br />
+                  </>
+                )}
+                <div className="grid grid-cols-2 gap-3">
+                  {aspects
+                    .filter((a) => a.isDark && (overrideAll || unlocksSet.has(a.slug)) && aspectEligible(a.slug))
+                    .sort((a, b) => (ASPECT_INDEX[a.slug] ?? 999) - (ASPECT_INDEX[b.slug] ?? 999))
+                    .map((a) => {
+                      const isSelected = chosenAspects.includes(a.slug);
+                      // Selection behavior follows normal non-special rules
+                      const total = chosenAspects.filter((s) => !aspects.find(x => x.slug === s)?.isSpecial && aspectEligible(s)).length;
+                      let disabled = false;
+                      if (!overrideAll && !isSelected) {
+                        if (total < 2) {
+                          disabled = false;
+                        } else if (total === 2) {
+                          const set = new Set([...chosenAspects.filter((s) => !aspects.find(x => x.slug === s)?.isSpecial), a.slug]);
+                          const isDarkTrio = set.size === 3 && (DARK_SLUGS as readonly string[]).every((s) => set.has(s));
+                          disabled = !isDarkTrio;
+                        } else {
+                          disabled = true;
+                        }
+                      }
+                      return (
+                        <AspectCard
+                          key={a.slug}
+                          aspect={a}
+                          unlocked={true}
+                          selected={isSelected}
+                          disabled={disabled}
+                          onToggle={() => toggleAspect(a.slug)}
+                        />
+                      );
+                    })}
+                </div>
+              </div>
+            )}
+
+            {/* Special Aspects under Dark Arts */}
+            {(overrideAll || aspects.some((a) => a.isSpecial && unlocksSet.has(a.slug) && aspectEligible(a.slug))) && (
+              <div className="space-y-3">
+                <h2 className="font-semibold text-center">Special Aspects</h2>
+                {specialSlotsText && (
+                  <div className="text-sm text-slate-600 text-center">
+                    {specialSlotsText}
+                    {hasAstral && hasShadow ? (<><br />
+                    <br /></>) : null}
+                  </div>
+                )}
+                <div className="grid grid-cols-2 gap-3">
+                  {aspects
+                    .filter((a) => a.isSpecial && (overrideAll || unlocksSet.has(a.slug)) && aspectEligible(a.slug))
+                    .sort((a, b) => (ASPECT_INDEX[a.slug] ?? 999) - (ASPECT_INDEX[b.slug] ?? 999))
+                    .map((a) => {
+                    const isSelected = chosenAspects.includes(a.slug);
+                    return (
+                      <AspectCard
+                        key={a.slug}
+                        aspect={a}
+                        unlocked={true}
+                        selected={isSelected}
+                        onToggle={() => toggleAspect(a.slug)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-3">
@@ -1026,106 +1112,28 @@ export default function App() {
             </div>
           </div>
 
-          {/* Dark Arts (hidden until unlocked) */}
-          {showDarkCategory && (
-            <div className="space-y-3">
-              <h2 className="font-semibold text-center">Dark Arts</h2>
-              {!overrideAll && allDarkTrioSelected && (
-                <>
-                  <div className="text-sm font-semibold text-center mb-3">
-                    <span className="text-red-700 font-bold" style={{ color: '#dc2626', fontWeight: 700 }}>Dark Arts Penalty:</span>
-                    {' '}When all three Dark Aspects are chosen, [Holy] spells count as [Light] and lose [Holy] counter rules.
-                  </div>
-                  <br />
-                </>
-              )}
-            <div className="grid grid-cols-2 gap-3">
-              {aspects
-                .filter((a) => a.isDark && (overrideAll || unlocksSet.has(a.slug)) && aspectEligible(a.slug))
-                .sort((a, b) => (ASPECT_INDEX[a.slug] ?? 999) - (ASPECT_INDEX[b.slug] ?? 999))
-                .map((a) => {
-                  const isSelected = chosenAspects.includes(a.slug);
-                  // Selection behavior follows normal non-special rules
-                  const total = chosenAspects.filter((s) => !aspects.find(x => x.slug === s)?.isSpecial && aspectEligible(s)).length;
-                  let disabled = false;
-                  if (!overrideAll && !isSelected) {
-                    if (total < 2) {
-                      disabled = false;
-                    } else if (total === 2) {
-                      const set = new Set([...chosenAspects.filter((s) => !aspects.find(x => x.slug === s)?.isSpecial), a.slug]);
-                      const isDarkTrio = set.size === 3 && (DARK_SLUGS as readonly string[]).every((s) => set.has(s));
-                      disabled = !isDarkTrio;
-                    } else {
-                      disabled = true;
-                    }
-                  }
-                  return (
-                    <AspectCard
-                      key={a.slug}
-                      aspect={a}
-                      unlocked={true}
-                      selected={isSelected}
-                      disabled={disabled}
-                      onToggle={() => toggleAspect(a.slug)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Special Aspects (hidden until unlocked) */}
-          {(overrideAll || aspects.some((a) => a.isSpecial && unlocksSet.has(a.slug) && aspectEligible(a.slug))) && (
-            <div className="space-y-3">
-              <h2 className="font-semibold text-center">Special Aspects</h2>
-              {specialSlotsText && (
-                <div className="text-sm text-slate-600 text-center">
-                  {specialSlotsText}
-                  {hasAstral && hasShadow ? (<><br />
-                  <br /></>) : null}
-                </div>
-              )}
-              <div className="grid grid-cols-2 gap-3">
-                {aspects
-                  .filter((a) => a.isSpecial && (overrideAll || unlocksSet.has(a.slug)) && aspectEligible(a.slug))
-                  .sort((a, b) => (ASPECT_INDEX[a.slug] ?? 999) - (ASPECT_INDEX[b.slug] ?? 999))
-                  .map((a) => {
-                  const isSelected = chosenAspects.includes(a.slug);
-                  return (
-                    <AspectCard
-                      key={a.slug}
-                      aspect={a}
-                      unlocked={true}
-                      selected={isSelected}
-                      onToggle={() => toggleAspect(a.slug)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          )}
+          {/* Dark and Special moved under Basics in the left column */}
         </section>
 
         {/* Cards grouped by Aspect */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
+          <div className="bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 shadow-sm">
             <h3 className="font-semibold mb-2 text-center">Cards (from selected Aspects)</h3>
             <div className="space-y-4">
               {groupedByAspect.map((group) => (
                 <div key={group.slug}>
-                  <div className="font-bold text-slate-800 mb-1 text-center" style={{ fontSize: '24px' }}>
+                  <div className="font-bold text-slate-900 dark:text-slate-100 mb-1 text-center" style={{ fontSize: '24px' }}>
                     {group.name && group.name.startsWith('Aspect of ')
                       ? group.name
                       : `Aspect of ${group.name}`}
                   </div>
-                  <div className="mb-2 text-center">
+                  <div className="mb-2 flex items-center justify-center gap-3 transform -translate-x-2 md:-translate-x-4">
                     {(() => {
                       const pageCapReached = totalQty >= 30;
                       const groupHasCountable = group.cards.some(c => c.type !== 'Astral' && c.type !== 'Shadow');
-                      // Special handling for Astral/Shadow "PICK ALL"
                       const allAstral = group.cards.every(c => c.type === 'Astral');
                       const allShadow = group.cards.every(c => c.type === 'Shadow');
-                      let disabled = pageCapReached && groupHasCountable;
+                      let pickDisabled = pageCapReached && groupHasCountable;
                       if (allAstral || allShadow) {
                         const allAtMax = group.cards.every(c => (entries[c.id] || 0) >= c.maxCopies);
                         const typeCapReached = allAstral
@@ -1133,64 +1141,80 @@ export default function App() {
                           : allShadow
                           ? counts.Shadow >= 3
                           : false;
-                        disabled = allAtMax || typeCapReached;
+                        pickDisabled = allAtMax || typeCapReached;
                       }
+                      const allZero = group.cards.every(c => (entries[c.id] || 0) <= 0);
                       return (
-                        <button
-                          type="button"
-                          className={[
-                            "inline-flex items-center gap-1 rounded-md px-3 py-1 text-sm",
-                            disabled ? "bg-slate-100 text-slate-400 cursor-not-allowed" : "bg-emerald-100 text-emerald-800 hover:bg-emerald-200",
-                          ].join(' ')}
-                          disabled={disabled}
-                          onClick={() => {
-                            if (disabled) return;
-                            console.log('[Aspect.pickAll]', { aspect: group.slug });
-                        setEntries((prev) => {
-                          const next = { ...prev } as Record<string, number>;
-                          let pages = totalQty;
-                          const typeRoom: Record<SpellType, number> = { ...(remainingByType as any) };
-                          // Remaining special caps based on current counts
-                          let astralRoom = Math.max(0, 7 - counts.Astral);
-                          let shadowRoom = Math.max(0, 3 - counts.Shadow);
-                          for (const card of group.cards) {
-                            const locked = !unlocksSet.has(card.aspect) && !isBasicAspect(card.aspect);
-                            if (locked) continue;
-                            const current = next[card.id] || 0;
-                            const add = Math.max(0, card.maxCopies - current);
-                            if (add <= 0) { continue; }
-
-                            if (card.type === 'Astral') {
-                              if (astralRoom <= 0) continue;
-                              const toAdd = Math.min(add, astralRoom);
-                              next[card.id] = current + toAdd;
-                              astralRoom -= toAdd;
-                              continue;
-                            }
-                            if (card.type === 'Shadow') {
-                              if (shadowRoom <= 0) continue;
-                              const toAdd = Math.min(add, shadowRoom);
-                              next[card.id] = current + toAdd;
-                              shadowRoom -= toAdd;
-                              continue;
-                            }
-
-                            // Holy/Light/Dark → observe 30-page and per-type room
-                            const roomTotal = Math.max(0, 30 - pages);
-                            const roomType = Math.max(0, typeRoom[card.type] ?? Number.POSITIVE_INFINITY);
-                            const room = Math.min(roomTotal, roomType);
-                            const toAdd = Math.min(add, room);
-                            next[card.id] = current + toAdd;
-                            pages += toAdd;
-                            if (Number.isFinite(roomType)) typeRoom[card.type] = Math.max(0, roomType - toAdd) as any;
-                            if (pages >= 30) break;
-                          }
-                          return next;
-                        });
-                          }}
-                        >
-                          PICK ALL
-                        </button>
+                        <>
+                          <button
+                            type="button"
+                            className={[
+                              "inline-flex items-center gap-1 rounded-md px-3 py-1 text-sm shadow-sm",
+                              pickDisabled ? "bg-slate-100 text-slate-400 cursor-not-allowed" : "bg-emerald-100 text-emerald-800 hover:bg-emerald-200",
+                            ].join(' ')}
+                            disabled={pickDisabled}
+                            onClick={() => {
+                              if (pickDisabled) return;
+                              console.log('[Aspect.pickAll]', { aspect: group.slug });
+                              setEntries((prev) => {
+                                const next = { ...prev } as Record<string, number>;
+                                let pages = totalQty;
+                                const typeRoom: Record<SpellType, number> = { ...(remainingByType as any) };
+                                let astralRoom = Math.max(0, 7 - counts.Astral);
+                                let shadowRoom = Math.max(0, 3 - counts.Shadow);
+                                for (const card of group.cards) {
+                                  const locked = !unlocksSet.has(card.aspect) && !isBasicAspect(card.aspect);
+                                  if (locked) continue;
+                                  const current = next[card.id] || 0;
+                                  const add = Math.max(0, card.maxCopies - current);
+                                  if (add <= 0) { continue; }
+                                  if (card.type === 'Astral') {
+                                    if (astralRoom <= 0) continue;
+                                    const n = Math.min(add, astralRoom);
+                                    next[card.id] = current + n; astralRoom -= n; continue;
+                                  }
+                                  if (card.type === 'Shadow') {
+                                    if (shadowRoom <= 0) continue;
+                                    const n = Math.min(add, shadowRoom);
+                                    next[card.id] = current + n; shadowRoom -= n; continue;
+                                  }
+                                  const roomTotal = Math.max(0, 30 - pages);
+                                  const roomType = Math.max(0, (typeRoom[card.type] ?? 0));
+                                  const room = Math.min(roomTotal, roomType);
+                                  if (room <= 0) continue;
+                                  const n = Math.min(add, room);
+                                  pages += n;
+                                  typeRoom[card.type] = Math.max(0, (typeRoom[card.type] ?? 0) - n);
+                                  next[card.id] = current + n;
+                                }
+                                return next;
+                              });
+                            }}
+                          >
+                            PICK ALL
+                          </button>
+                          <button
+                            type="button"
+                            className={[
+                              "inline-flex items-center gap-1 rounded-md px-3 py-1 text-sm shadow-sm",
+                              allZero ? "bg-slate-100 text-slate-400 cursor-not-allowed" : "bg-rose-100 text-rose-800 hover:bg-rose-200",
+                            ].join(' ')}
+                            disabled={allZero}
+                            onClick={() => {
+                              if (allZero) return;
+                              console.log('[Aspect.removeAll]', { aspect: group.slug });
+                              setEntries((prev) => {
+                                const next = { ...prev } as Record<string, number>;
+                                for (const card of group.cards) {
+                                  next[card.id] = 0;
+                                }
+                                return next;
+                              });
+                            }}
+                          >
+                            REMOVE ALL
+                          </button>
+                        </>
                       );
                     })()}
                   </div>
@@ -1220,7 +1244,7 @@ export default function App() {
 
           {/* Summary + Export */}
           <div className="space-y-4">
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <div className="bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 shadow-sm">
               <h3 className="font-semibold mb-2 text-center">Deck Summary:</h3>
               <div className="text-center font-mono whitespace-pre-wrap">
                 <div className="text-lg">{totalQty}/30 Pages</div>
@@ -1244,7 +1268,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <div className="bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 shadow-sm">
               <h3 className="font-semibold mb-2 text-center">Grimoire</h3>
               <DeckExport
                 entries={Object.entries(entries).map(([cardId, qty]) => ({ cardId, qty }))}
