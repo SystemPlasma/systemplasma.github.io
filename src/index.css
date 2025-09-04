@@ -1,8 +1,0 @@
-@import "tailwindcss";
-
-/* Base page background to match modal panel in dark mode */
-@layer base {
-  body {
-    @apply bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100;
-  }
-}
