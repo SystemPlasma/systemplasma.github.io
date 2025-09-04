@@ -188,7 +188,7 @@ function AspectCard({
               "dark:bg-slate-800 dark:border-indigo-400 dark:ring-indigo-400 dark:ring-offset-slate-900",
             ].join(' ')
           : "border-slate-400 bg-slate-200 hover:bg-slate-300 hover:shadow-md dark:bg-slate-800 dark:border-slate-600",
-        (!unlocked || disabled) ? "opacity-50 dark:opacity-90 cursor-not-allowed" : "hover:border-slate-500",
+        (!unlocked || disabled) ? "opacity-40 cursor-not-allowed pointer-events-none" : "hover:border-slate-500",
       ].join(" ")}
     >
       <div className="flex flex-col items-center gap-1">
@@ -759,8 +759,24 @@ export default function App() {
     // not reached
   }
 
+  // When an aspect is deselected, remove all cards from that aspect
+  function clearAspectEntries(slug: string) {
+    setEntries((prev) => {
+      const next = { ...prev } as Record<string, number>;
+      for (const c of cards) {
+        if (c.aspect === slug) next[c.id] = 0;
+      }
+      return next;
+    });
+  }
+
   function toggleBasic(slug: string) {
-    setBasicsSelected((prev) => (prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]));
+    if (basicsSelected.includes(slug)) {
+      setBasicsSelected((prev) => prev.filter((s) => s !== slug));
+      clearAspectEntries(slug);
+    } else {
+      setBasicsSelected((prev) => [...prev, slug]);
+    }
   }
 
   function toggleAspect(slug: string) {
@@ -778,6 +794,7 @@ export default function App() {
 
     if (exists) {
       setChosenAspects(chosenAspects.filter((s) => s !== slug));
+      clearAspectEntries(slug);
       return;
     }
 
@@ -1045,7 +1062,7 @@ export default function App() {
               <div className="space-y-3">
                 <h2 className="font-semibold text-center">Special Aspects</h2>
                 {specialSlotsText && (
-                  <div className="text-sm text-slate-600 text-center">
+                  <div className="text-sm text-slate-700 dark:text-slate-200 text-center">
                     {specialSlotsText}
                     {hasAstral && hasShadow ? (<><br />
                     <br /></>) : null}
@@ -1075,7 +1092,7 @@ export default function App() {
           <div className="space-y-3">
             <h2 className="font-semibold text-center">
               Additional Aspects{' '}
-              <span className="text-slate-500">
+              <span className="text-slate-600 dark:text-slate-200">
                 {showDarkCategory ? '(choose up to 2 — or all 3 Dark Arts)' : '(choose up to 2)'}
               </span>
             </h2>

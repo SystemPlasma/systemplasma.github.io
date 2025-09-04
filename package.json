@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/gen-image-map.cjs && vite",
-    "build": "node scripts/gen-image-map.cjs && tsc -b && vite build",
+    "build": "node scripts/gen-image-map.cjs && tsc -p . && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
@@ -35,4 +35,3 @@
     "vite": "^7.1.2"
   }
 }
-
