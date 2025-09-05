@@ -1,16 +1,15 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CARD_IMAGE_URLS from './imageMap';
-// CSV data will be fetched at runtime (no ?raw import)
-// Append a simple cache-busting query so CSV edits are picked up reliably in dev and after deploy.
-const __CSV_VER = ((import.meta as any)?.env?.VITE_BUILD_ID) ?? (typeof Date !== 'undefined' ? String(Date.now()) : 'dev');
-const aspectsCsvUrl = new URL(`./assets/data/aspects.csv?v=${__CSV_VER}`, import.meta.url).href;
-const cardsCsvUrl = new URL(`./assets/data/cards.csv?v=${__CSV_VER}`, import.meta.url).href;
-// Allow overriding codes CSV at runtime via env (useful to host a replaceable file)
+// CSV data will be fetched at runtime via Vite-managed asset URLs
+// Use new URL(..., import.meta.url) without query strings so Vite fingerprints and updates on deploy
+const aspectsCsvUrl = new URL('./assets/data/aspects.csv', import.meta.url).href;
+const cardsCsvUrl = new URL('./assets/data/cards.csv', import.meta.url).href;
+// Allow overriding codes CSV at runtime via env (optional). If unset, use local Vite asset.
 const __CODES_BASE = ((import.meta as any)?.env?.VITE_CODES_URL) as string | undefined;
 const codesCsvUrl = __CODES_BASE
-  ? `${__CODES_BASE}?v=${__CSV_VER}`
-  : new URL(`./assets/data/unlock_codes.csv?v=${__CSV_VER}`, import.meta.url).href;
+  ? __CODES_BASE
+  : new URL('./assets/data/unlock_codes.csv', import.meta.url).href;
 
 /** ------------------------
  * Card Data
