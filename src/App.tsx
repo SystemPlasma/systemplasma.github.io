@@ -387,7 +387,7 @@ function CardRow({
         <button
           onClick={() => { if (qty <= 0) return; const n = Math.max(0, qty - 1); console.log('[CardRow.qty-]', { id: card.id, from: qty, to: n }); onChange(n); }}
           disabled={qty <= 0}
-          className={["px-2 py-1 rounded shadow-sm text-lg font-bold text-slate-900 dark:text-slate-900 leading-none", qty <= 0 ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
+          className={["px-2 py-1 rounded shadow-sm text-base md:text-lg font-bold text-slate-900 dark:text-slate-900 leading-none", qty <= 0 ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
         >
           -
         </button>
@@ -402,7 +402,7 @@ function CardRow({
             onChange(n);
           }}
           disabled={locked || noRoomTotal || qty >= card.maxCopies}
-          className={["px-2 py-1 rounded shadow-sm text-lg font-bold text-slate-900 dark:text-slate-900 leading-none", locked || addDisabled || qty >= card.maxCopies ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
+          className={["px-2 py-1 rounded shadow-sm text-base md:text-lg font-bold text-slate-900 dark:text-slate-900 leading-none", locked || addDisabled || qty >= card.maxCopies ? "bg-slate-100 opacity-50 cursor-not-allowed" : "bg-slate-100"].join(' ')}
         >
           +
         </button>
@@ -962,10 +962,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex justify-center px-6 md:px-10 lg:px-20 xl:px-28 py-6 m-4 sm:m-6 md:m-8 lg:m-12">
       <div className="max-w-7xl w-full mx-auto space-y-6 sm:space-y-8 text-center">
-        <header className="grid grid-cols-3 items-center justify-items-center w-full px-4 md:px-6">
-          <div className="justify-self-center mx-8 mt-2 md:mt-3">
+        <header className="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center gap-2 w-full px-4 md:px-6">
+          <div className="justify-self-center sm:justify-self-start mx-2 sm:mx-8 mt-1 md:mt-3 w-full sm:w-auto">
             <details className="relative">
-              <summary className="list-none cursor-pointer inline-flex items-center gap-3 rounded-xl border-2 px-6 py-2.5 text-xl md:text-2xl bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100 border-slate-300 dark:border-slate-600 shadow-md font-semibold min-w-[180px]">
+              <summary className="list-none cursor-pointer inline-flex items-center gap-3 rounded-xl border-2 px-4 py-2 text-base md:text-xl bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100 border-slate-300 dark:border-slate-600 shadow-md font-semibold min-w-[140px] md:min-w-[180px]">
                 <span>Rank: {rankCap}</span>
                 <span aria-hidden>▾</span>
               </summary>
@@ -992,14 +992,14 @@ export default function App() {
               Some aspects only appear at higher Ranks.
             </div>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold justify-self-center text-center">WKW Deck Builder</h1>
-          <div className="flex items-center gap-2 justify-self-center mx-8 mt-2 md:mt-3">
+          <h1 className="text-2xl md:text-4xl font-bold justify-self-center text-center">WKW Deck Builder</h1>
+          <div className="flex items-center gap-2 justify-self-center sm:justify-self-end mx-2 sm:mx-8 mt-1 md:mt-3 w-full sm:w-auto">
             {!overrideAll && (
               <button
                 type="button"
                 aria-label="Unlock Aspects"
                 onClick={() => { console.log('[UI] Unlock Codes clicked'); setShowUnlock(true); }}
-                className="rounded-xl border-2 px-5 py-2.5 text-xl md:text-2xl bg-indigo-600 text-white hover:bg-indigo-700 shadow-md font-semibold min-w-[200px]"
+                className="rounded-xl border-2 px-4 py-2 text-base md:text-xl bg-indigo-600 text-white hover:bg-indigo-700 shadow-md font-semibold min-w-[140px] md:min-w-[200px]"
               >
                 Unlock Aspects
               </button>
