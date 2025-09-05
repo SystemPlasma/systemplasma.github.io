@@ -341,10 +341,10 @@ function CardRow({
           </button>
         )}
       </div>
-      {/* Center: type/rank/max — stacked on mobile, single line on md+ */}
-      <div className="flex-1 text-center leading-tight">
+      {/* Center: type/rank/max — stacked on mobile, grouped with spacing on md+ */}
+      <div className="flex-1 leading-tight text-center md:text-left md:pl-2">
         {/* Mobile: stacked */}
-        <div className="md:hidden">
+        <div className="md:hidden text-left pl-2">
           <div className="text-base text-slate-600 dark:text-slate-300">
             {(() => {
               const PARALLEL_IDS = new Set<string>([
@@ -355,18 +355,21 @@ function CardRow({
               return locked ? '?' : `${card.type}${mark} · R${card.rank}`;
             })()}
           </div>
-          <div className="text-xs text-slate-500 dark:text-slate-300">Max {card.maxCopies}</div>
+          <div className="text-xs text-slate-500 dark:text-slate-300 mt-1">Max {card.maxCopies}</div>
         </div>
-        {/* Desktop: single line */}
-        <div className="hidden md:block text-base text-slate-600 dark:text-slate-300">
-          {(() => {
-            const PARALLEL_IDS = new Set<string>([
-              'energy_supernova_converter','energy_will_power','energy_fears_grasp','energy_rage_unleashed',
-              'madness_twisted_space','madness_shattered_time','madness_splintered_mind','madness_unhinged_reality','madness_chaotic_power','madness_eclipsed_soul',
-            ]);
-            const mark = !locked && PARALLEL_IDS.has(card.id) ? ' (Parallel)' : '';
-            return locked ? '?' : `${card.type}${mark} · R${card.rank} · Max ${card.maxCopies}`;
-          })()}
+        {/* Desktop: single line with spacing between left (type/rank) and right (Max) */}
+        <div className="hidden md:flex items-baseline justify-start gap-6">
+          <span className="text-base text-slate-600 dark:text-slate-300">
+            {(() => {
+              const PARALLEL_IDS = new Set<string>([
+                'energy_supernova_converter','energy_will_power','energy_fears_grasp','energy_rage_unleashed',
+                'madness_twisted_space','madness_shattered_time','madness_splintered_mind','madness_unhinged_reality','madness_chaotic_power','madness_eclipsed_soul',
+              ]);
+              const mark = !locked && PARALLEL_IDS.has(card.id) ? ' (Parallel)' : '';
+              return locked ? '?' : `${card.type}${mark} · R${card.rank}`;
+            })()}
+          </span>
+          <span className="text-sm text-slate-500 dark:text-slate-300">Max {card.maxCopies}</span>
         </div>
       </div>
 
