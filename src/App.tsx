@@ -741,7 +741,7 @@ export default function App() {
       return { ok: true, unlockedName: 'Override Mode', status: 'ok' };
     }
     // Special code: make Lost a Basic aspect
-    if (key === 'EVER LOST' || keyUnderscored === 'EVER_LOST') {
+    if (key === 'ENDLESS SECRETS' || keyUnderscored === 'ENDLESS_SECRETS') {
       if (lostAsBasic) {
         return { ok: false, status: 'used' };
       }
