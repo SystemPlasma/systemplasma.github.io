@@ -2,9 +2,11 @@ import React, { useMemo, useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CARD_IMAGE_URLS from './imageMap';
 // CSV data will be fetched at runtime (no ?raw import)
-const aspectsCsvUrl = new URL('./assets/data/aspects.csv', import.meta.url).href;
-const cardsCsvUrl = new URL('./assets/data/cards.csv', import.meta.url).href;
-const codesCsvUrl = new URL('./assets/data/unlock_codes.csv', import.meta.url).href;
+// Append a simple cache-busting query so CSV edits are picked up reliably in dev and after deploy.
+const __CSV_VER = ((import.meta as any)?.env?.VITE_BUILD_ID) ?? (typeof Date !== 'undefined' ? String(Date.now()) : 'dev');
+const aspectsCsvUrl = new URL(`./assets/data/aspects.csv?v=${__CSV_VER}`, import.meta.url).href;
+const cardsCsvUrl = new URL(`./assets/data/cards.csv?v=${__CSV_VER}`, import.meta.url).href;
+const codesCsvUrl = new URL(`./assets/data/unlock_codes.csv?v=${__CSV_VER}`, import.meta.url).href;
 
 /** ------------------------
  * Card Data
@@ -141,7 +143,14 @@ async function loadDataFromCsv() {
     : undefined;
 
   const codes: Record<string, string> | undefined = codesRaw
-    ? Object.fromEntries(parseCSV(codesRaw).map(r => [r.code, r.slug]).filter(([code, slug]) => code && slug))
+    ? Object.fromEntries(
+        parseCSV(codesRaw)
+          .map(r => [
+            (r.code || '').trim().toUpperCase(),
+            (r.slug || '').trim().toLowerCase(),
+          ])
+          .filter(([code, slug]) => code && slug)
+      )
     : undefined;
 
   return { aspects, cards, codes } as { aspects?: Aspect[]; cards?: Card[]; codes?: Record<string,string> };
