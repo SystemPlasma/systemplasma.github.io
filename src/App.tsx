@@ -6,7 +6,11 @@ import CARD_IMAGE_URLS from './imageMap';
 const __CSV_VER = ((import.meta as any)?.env?.VITE_BUILD_ID) ?? (typeof Date !== 'undefined' ? String(Date.now()) : 'dev');
 const aspectsCsvUrl = new URL(`./assets/data/aspects.csv?v=${__CSV_VER}`, import.meta.url).href;
 const cardsCsvUrl = new URL(`./assets/data/cards.csv?v=${__CSV_VER}`, import.meta.url).href;
-const codesCsvUrl = new URL(`./assets/data/unlock_codes.csv?v=${__CSV_VER}`, import.meta.url).href;
+// Allow overriding codes CSV at runtime via env (useful to host a replaceable file)
+const __CODES_BASE = ((import.meta as any)?.env?.VITE_CODES_URL) as string | undefined;
+const codesCsvUrl = __CODES_BASE
+  ? `${__CODES_BASE}?v=${__CSV_VER}`
+  : new URL(`./assets/data/unlock_codes.csv?v=${__CSV_VER}`, import.meta.url).href;
 
 /** ------------------------
  * Card Data
@@ -772,7 +776,7 @@ export default function App() {
       }
       setUnlocks(all);
       return { ok: true, unlockedName: 'All Aspects', status: 'ok' };
-    } else if (slug === "#DARK_ALL") {
+    } else if (slug.toLowerCase() === "#dark_all") {
       const darks = aspects.filter(a => a.isDark).map(a => a.slug);
       const all = Array.from(new Set([...unlocks, ...darks]));
       if (all.length === unlocks.length) {
