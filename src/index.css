@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Optional: ensure body text colors honor dark mode backgrounds */
+html, body, #root {
+  height: 100%;
+}
+

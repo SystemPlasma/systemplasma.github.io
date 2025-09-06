@@ -5,8 +5,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/gen-image-map.cjs && vite",
-    "build": "node scripts/gen-image-map.cjs && tsc -p . && vite build",
+    "dev": "node scripts/sync-card-images.cjs && node scripts/gen-image-map.cjs && vite",
+    "build": "node scripts/sync-card-images.cjs && node scripts/gen-image-map.cjs && tsc -p . && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",

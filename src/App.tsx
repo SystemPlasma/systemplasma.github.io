@@ -1,16 +1,12 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CARD_IMAGE_URLS from './imageMap';
-// CSV data will be fetched at runtime (no ?raw import)
-// Append a simple cache-busting query so CSV edits are picked up reliably in dev and after deploy.
-const __CSV_VER = ((import.meta as any)?.env?.VITE_BUILD_ID) ?? (typeof Date !== 'undefined' ? String(Date.now()) : 'dev');
-const aspectsCsvUrl = new URL(`./assets/data/aspects.csv?v=${__CSV_VER}`, import.meta.url).href;
-const cardsCsvUrl = new URL(`./assets/data/cards.csv?v=${__CSV_VER}`, import.meta.url).href;
-// Allow overriding codes CSV at runtime via env (useful to host a replaceable file)
+// CSV data via Vite-managed URLs (no query strings) so builds fingerprint and refresh on deploy
+const aspectsCsvUrl = new URL('./assets/data/aspects.csv', import.meta.url).href;
+const cardsCsvUrl = new URL('./assets/data/cards.csv', import.meta.url).href;
+// Optional remote override for codes; otherwise use local Vite asset
 const __CODES_BASE = ((import.meta as any)?.env?.VITE_CODES_URL) as string | undefined;
-const codesCsvUrl = __CODES_BASE
-  ? `${__CODES_BASE}?v=${__CSV_VER}`
-  : new URL(`./assets/data/unlock_codes.csv?v=${__CSV_VER}`, import.meta.url).href;
+const codesCsvUrl = __CODES_BASE || new URL('./assets/data/unlock_codes.csv', import.meta.url).href;
 
 /** ------------------------
  * Card Data
@@ -776,7 +772,7 @@ export default function App() {
       }
       setUnlocks(all);
       return { ok: true, unlockedName: 'All Aspects', status: 'ok' };
-    } else if (slug.toLowerCase() === "#dark_all") {
+    } else if (String(slug).toLowerCase() === "#dark_all") {
       const darks = aspects.filter(a => a.isDark).map(a => a.slug);
       const all = Array.from(new Set([...unlocks, ...darks]));
       if (all.length === unlocks.length) {
@@ -964,7 +960,7 @@ export default function App() {
   const showDarkCategory = overrideAll || aspects.some((a) => a.isDark && unlocksSet.has(a.slug));
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex justify-center px-6 md:px-10 lg:px-20 xl:px-28 py-6 m-4 sm:m-6 md:m-8 lg:m-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 flex justify-center px-6 md:px-10 lg:px-20 xl:px-28 py-6">
       <div className="max-w-7xl w-full mx-auto space-y-6 sm:space-y-8 text-center">
         <header className="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center gap-2 w-full px-4 md:px-6">
           <div className="justify-self-center sm:justify-self-start mx-2 sm:mx-8 mt-1 md:mt-3 w-full sm:w-auto">
@@ -996,7 +992,7 @@ export default function App() {
               Some aspects only appear at higher Ranks.
             </div>
           </div>
-          <h1 className="text-2xl md:text-4xl font-bold justify-self-center text-center">WKW Deck Builder</h1>
+          <h1 className="text-2xl md:text-4xl font-bold justify-self-center text-center text-slate-900 dark:text-slate-100">WKW Deck Builder</h1>
           <div className="flex items-center gap-2 justify-self-center sm:justify-self-end mx-2 sm:mx-8 mt-1 md:mt-3 w-full sm:w-auto">
             {!overrideAll && (
               <button
