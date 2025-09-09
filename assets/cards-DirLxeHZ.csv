@@ -1,14 +1,14 @@
 id,name,type,rank,maxCopies,aspect,roles
 c_infinity,Infinity,Holy,1,4,Focus,
 c_speed,Speed,Light,1,4,Focus,move
-c_enhance,Enhance,Light,1,3,Focus,
-c_shield,Shield,Light,1,4,Focus,Disrupt
-c_counter,Counter,Light,1,4,Focus,Disrupt
-c_haste,Haste,Light,1,3,Focus,move
+c_enhance,Enhance,Light,1,3,Focus,combat
+c_shield,Shield,Light,1,4,Focus,combat
+c_counter,Counter,Light,1,4,Focus,disrupt
+c_haste,Haste,Light,1,3,Focus,combat
 c_sorcerersgambit,Sorcerer's Gambit,Light,1,2,Focus,
 c_arcane_vision,Arcane Vision,Light,1,2,Focus,draw
 c_teleport,Teleport,Light,1,2,Focus,move
-c_dread,Dread,Dark,1,2,Focus,
+c_dread,Dread,Dark,1,2,Focus,reveal
 s_gainwisdom,Gain Wisdom,Light,2,2,Study,draw
 s_flexibletactics,Flexible Tactics,Light,2,2,Study,
 s_foolscourage,Fool's Courage,Light,2,2,Study,
