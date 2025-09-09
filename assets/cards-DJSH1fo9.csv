@@ -37,7 +37,7 @@ lost_thought_acceleration,Thought Acceleration,Light,4,2,Lost,special
 lost_wish,Wish,Holy,5,3,Lost,special
 lost_mystical_knowledge,Mystical Knowledge,Light,3,2,Lost,draw
 thecrown_majestys_valor,Majesty's Valor,Holy,2,2,The Crown,combat
-thecrown_divine_favor,Divine Favor,Holy,2,2,The Crown,
+thecrown_divine_favor,Divine Favor,Holy,2,2,The Crown,draw
 thecrown_radiant_aegis,Radiant Aegis,Light,3,2,The Crown,
 thecrown_royal_aura,Royal Aura,Light,3,2,The Crown,movement_reduction
 thecrown_royal_destiny,Royal Destiny,Light,3,1,The Crown,
@@ -46,15 +46,15 @@ thecrown_mimic_mantle,Mimic Mantle,Light,3,2,The Crown,combat;special
 thecrown_royal_mantle,Royal Mantle,Light,3,1,The Crown,combat
 thewilds_thorn_shield,Thorn Shield,Light,3,2,The Wilds,disrupt
 thewilds_twilight_reign,Twilight Reign,Dark,3,1,The Wilds,
-thewilds_verdant_judgement,Verdant Judgement,Light,4,2,The Wilds,
+thewilds_verdant_judgement,Verdant Judgement,Light,4,2,The Wilds,special;power_reduction;movement_reduction
 thewilds_path_of_thorns,Path of Thorns,Light,3,2,The Wilds,move
-thewilds_whispers_of_the_wild,Whispers of the Wild,Light,2,2,The Wilds,
+thewilds_whispers_of_the_wild,Whispers of the Wild,Light,2,2,The Wilds,draw
 thewilds_rootshift,Rootshift,Light,2,2,The Wilds,move
 pain_agonys_grasp,Agony's Grasp,Light,3,2,Pain,
 pain_surge_of_desperation,Surge of Desperation,Light,3,2,Pain,combat
-pain_wounds_of_betrayal,Wounds of Betrayal,Light,3,3,Pain,
-pain_gift_of_agony,Gift of Agony,Dark,4,1,Pain,
-pain_torment_bind,Torment Bind,Light,3,2,Pain,
+pain_wounds_of_betrayal,Wounds of Betrayal,Light,3,3,Pain,movement_increase;power_reduction
+pain_gift_of_agony,Gift of Agony,Dark,4,1,Pain,power_increase
+pain_torment_bind,Torment Bind,Light,3,2,Pain,special,counter
 pain_lingering_miasma,Lingering Miasma,Light,3,2,Pain,
 panic_demonic_intervention,Demonic Intervention,Dark,4,1,Panic,power_increase;counter
 panic_rush,Rush,Light,3,2,Panic,combat
