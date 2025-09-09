@@ -2,7 +2,7 @@ id,name,type,rank,maxCopies,aspect,roles
 c_infinity,Infinity,Holy,1,4,Focus,special
 c_speed,Speed,Light,1,4,Focus,move;movement_increase
 c_enhance,Enhance,Light,1,3,Focus,combat;power_increase
-c_shield,Shield,Light,1,4,Focus,combat;disrupt;counter
+c_shield,Shield,Light,1,4,Focus,combat;disrupt;counter;disruption
 c_counter,Counter,Light,1,4,Focus,disrupt;counter
 c_haste,Haste,Light,1,3,Focus,combat;move;power_increase;movement_increase
 c_sorcerersgambit,Sorcerer's Gambit,Light,1,2,Focus,draw;search_draw
@@ -54,7 +54,7 @@ pain_agonys_grasp,Agony's Grasp,Light,3,2,Pain,power_reduction
 pain_surge_of_desperation,Surge of Desperation,Light,3,2,Pain,combat
 pain_wounds_of_betrayal,Wounds of Betrayal,Light,3,3,Pain,movement_increase;power_reduction
 pain_gift_of_agony,Gift of Agony,Dark,4,1,Pain,power_increase
-pain_torment_bind,Torment Bind,Light,3,2,Pain,special,counter
+pain_torment_bind,Torment Bind,Light,3,2,Pain,special
 pain_lingering_miasma,Lingering Miasma,Light,3,2,Pain,
 panic_demonic_intervention,Demonic Intervention,Dark,4,1,Panic,power_increase;counter
 panic_rush,Rush,Light,3,2,Panic,movement_increase
