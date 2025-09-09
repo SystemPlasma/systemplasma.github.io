@@ -2,8 +2,8 @@ id,name,type,rank,maxCopies,aspect,roles
 c_infinity,Infinity,Holy,1,4,Focus,
 c_speed,Speed,Light,1,4,Focus,move
 c_enhance,Enhance,Light,1,3,Focus,
-c_shield,Shield,Light,1,4,Focus,disrupt
-c_counter,Counter,Light,1,4,Focus,disrupt
+c_shield,Shield,Light,1,4,Focus,Disrupt
+c_counter,Counter,Light,1,4,Focus,Disrupt
 c_haste,Haste,Light,1,3,Focus,move
 c_sorcerersgambit,Sorcerer's Gambit,Light,1,2,Focus,
 c_arcane_vision,Arcane Vision,Light,1,2,Focus,draw
