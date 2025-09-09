@@ -12,7 +12,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "codes:check": "node scripts/validate-codes.cjs",
-    "codes:fix": "node scripts/validate-codes.cjs --fix"
+    "codes:fix": "node scripts/validate-codes.cjs --fix",
+    "roles:seed": "node scripts/seed-roles.cjs"
   },
   "dependencies": {
     "react": "^19.1.1",

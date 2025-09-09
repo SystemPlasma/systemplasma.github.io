@@ -5,3 +5,8 @@ html, body, #root {
   height: 100%;
 }
 
+/* Footer contrast variables for light/dark */
+:root { --footer-fg: #475569; }
+@media (prefers-color-scheme: dark) {
+  :root { --footer-fg: rgba(255,255,255,0.75); }
+}
